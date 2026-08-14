@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Owner Dashboard — RIDEX</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/owner.css">
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <h1>RIDE<span class="mark-x">X</span></h1>
+    <p class="sidebar-tag">Owner panel</p>
+
+    <ul>
+
+        <li class="is-active">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+            Dashboard
+        </li>
+
+        <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 13l2-6a3 3 0 0 1 3-2h8a3 3 0 0 1 3 2l2 6"/><rect x="2" y="13" width="20" height="6" rx="2"/><circle cx="7" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
+            Add vehicle
+        </li>
+
+        <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+            Bookings
+        </li>
+
+        <li onclick="logout()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
+            Logout
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="main-content">
+
+    <!-- WELCOME BANNER -->
+
+    <div class="welcome-banner">
+
+        <h1>
+            Welcome back
+        </h1>
+
+        <p>
+            Manage your vehicles, bookings and earnings
+            from one dashboard.
+        </p>
+
+    </div>
+
+    <!-- ANALYTICS -->
+
+    <div class="stats-container">
+
+        <div class="stat-card">
+
+            <h3>Total vehicles</h3>
+
+            <p id="totalVehicles">
+                0
+            </p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>Total bookings</h3>
+
+            <p id="totalBookings">
+                0
+            </p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>Approved</h3>
+
+            <p id="approvedBookings">
+                0
+            </p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>Revenue</h3>
+
+            <p id="totalRevenue">
+                Rs. 0
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- ADD VEHICLE -->
+
+    <h2>Add new vehicle</h2>
+
+    <div class="form-container">
+
+        <input
+                type="text"
+                id="name"
+                placeholder="Vehicle Name">
+
+        <input
+                type="text"
+                id="type"
+                placeholder="Vehicle Type (car, bike, scooter, truck)">
+
+        <input
+                type="number"
+                id="price"
+                placeholder="Price Per Day">
+
+        <input
+                type="file"
+                id="image">
+
+        <button onclick="addVehicle()">
+            Add vehicle
+        </button>
+
+    </div>
+
+    <!-- VEHICLE SECTION -->
+
+    <div class="vehicle-list">
+
+        <h2>Your vehicles</h2>
+
+        <div id="vehicleContainer"></div>
+
+    </div>
+
+    <!-- BOOKING SECTION -->
+
+    <div class="booking-requests">
+
+        <h2>Booking requests</h2>
+
+        <div id="bookingContainer"></div>
+
+    </div>
+
+</div>
+
+<script src="../js/owner.js"></script>
+
+</body>
+
+</html>

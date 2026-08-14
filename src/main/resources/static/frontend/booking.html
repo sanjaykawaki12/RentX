@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Bookings — RIDEX</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="../css/booking.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        RIDE<span class="mark-x">X</span>
+    </div>
+
+    <div class="nav-right">
+
+        <button onclick="window.location.href='user.html'">
+            Home
+        </button>
+
+    </div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="stripe stripe-1"></div>
+    <div class="stripe stripe-2"></div>
+
+    <div class="hero-content">
+
+        <p class="hero-tag">your ride history</p>
+
+        <h1>
+            MY BOOKINGS
+        </h1>
+
+        <p>
+            Track all your vehicle rentals in one place
+        </p>
+
+    </div>
+
+</section>
+
+<!-- BOOKINGS -->
+
+<section class="booking-section">
+
+    <h2>
+        Booking history
+    </h2>
+
+    <div id="bookingContainer">
+
+    </div>
+
+</section>
+
+<!-- EMPTY STATE -->
+
+<div class="empty-state" id="emptyState">
+
+    <h3>
+        No bookings yet
+    </h3>
+
+    <p>
+        Start exploring vehicles and make your first booking.
+    </p>
+
+</div>
+
+<script src="../js/booking.js"></script>
+
+</body>
+
+</html>

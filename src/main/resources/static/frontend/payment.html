@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment — RIDEX</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/payment.css">
+
+    <!-- Razorpay Checkout -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+
+<div class="payment-box">
+
+    <div class="payment-head">
+        <span class="brand-mark">RIDE<span class="mark-x">X</span></span>
+        <h1>Complete payment</h1>
+        <p class="subtitle">Secure checkout, powered by Razorpay</p>
+    </div>
+
+    <!-- VEHICLE SUMMARY -->
+    <div class="vehicle-summary">
+        <div>
+            <p class="summary-label">Vehicle</p>
+            <p id="vehicleName" class="summary-value">Loading…</p>
+        </div>
+        <div>
+            <p class="summary-label">Rate</p>
+            <p id="pricePerDay" class="summary-value">—</p>
+        </div>
+    </div>
+
+    <div class="date-row">
+        <div>
+            <label class="field-label" for="fromDate">From date</label>
+            <input type="date" id="fromDate">
+        </div>
+
+        <div>
+            <label class="field-label" for="toDate">To date</label>
+            <input type="date" id="toDate">
+        </div>
+    </div>
+
+    <div class="amount-row">
+        <span>Total amount</span>
+        <span id="totalAmount">Rs. 0</span>
+    </div>
+
+    <button class="btn-primary" onclick="payNow()">
+        Pay with Razorpay
+    </button>
+
+    <button class="btn-secondary" onclick="downloadInvoice()">
+        Download invoice
+    </button>
+
+</div>
+
+<script src="../js/payment.js"></script>
+
+</body>
+</html>

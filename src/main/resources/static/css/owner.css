@@ -1,0 +1,422 @@
+:root {
+  --ink: #0B0B0E;
+  --surface: #17171B;
+  --surface-2: #1E1E23;
+  --red: #E4342F;
+  --red-dark: #A8241F;
+  --gold: #F2B705;
+  --off-white: #F5F3EE;
+  --muted: #9B9AA3;
+  --border: rgba(245,243,238,0.08);
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--off-white);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: 'Bebas Neue', 'Inter', sans-serif;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.mark-x {
+  color: var(--red);
+}
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar h1 {
+  font-size: 1.6rem;
+}
+
+.sidebar-tag {
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0.3rem 0 2.2rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sidebar li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.sidebar li:hover {
+  background: var(--surface-2);
+  color: var(--off-white);
+}
+
+.sidebar li.is-active {
+  background: var(--red);
+  color: var(--off-white);
+}
+
+/* ---------- Main content ---------- */
+
+.main-content {
+  padding: 2.5rem 3rem;
+}
+
+.welcome-banner {
+  background: linear-gradient(135deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.welcome-banner h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-banner p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* ---------- Stats ---------- */
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2.6rem;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.3rem 1.5rem;
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+
+.stat-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+.stat-card h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.1rem;
+  color: var(--off-white);
+  margin: 0;
+}
+
+/* ---------- Section headings ---------- */
+
+.main-content > h2 {
+  font-size: 1.5rem;
+  margin: 2rem 0 1.2rem;
+}
+
+/* ---------- Add vehicle form ---------- */
+
+.form-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"] {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--off-white);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+}
+
+.form-container input::placeholder {
+  color: var(--muted);
+}
+
+.form-container input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(242,183,5,0.18);
+}
+
+.form-container input[type="file"] {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.form-container button {
+  background: var(--red);
+  color: var(--off-white);
+  border: none;
+  border-radius: 10px;
+  padding: 0.78rem 1.2rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+
+.form-container button:hover {
+  background: var(--red-dark);
+}
+
+/* ---------- Vehicle list ---------- */
+
+#vehicleContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+
+.card:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  background: var(--surface-2);
+}
+
+.card .info {
+  padding: 1rem;
+}
+
+.card .info h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.card .info p {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 0 0 0.6rem;
+  text-transform: capitalize;
+}
+
+.card .info h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin: 0 0 0.9rem;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.edit-btn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+}
+
+.edit-btn:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.delete-btn {
+  background: transparent;
+  border: 1px solid var(--red);
+  color: var(--red);
+}
+
+.delete-btn:hover {
+  background: var(--red);
+  color: var(--off-white);
+}
+
+/* ---------- Booking requests ---------- */
+
+#bookingContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.2rem;
+}
+
+.booking-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.3rem;
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+
+.booking-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+.booking-card h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.booking-card p {
+  color: var(--muted);
+  font-size: 0.86rem;
+  margin: 0.3rem 0;
+}
+
+.booking-card b {
+  color: var(--off-white);
+}
+
+.approve-btn,
+.reject-btn {
+  margin-top: 0.7rem;
+  margin-right: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 200ms ease, opacity 200ms ease;
+}
+
+.approve-btn {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.approve-btn:hover {
+  opacity: 0.85;
+}
+
+.reject-btn {
+  background: transparent;
+  border: 1px solid var(--red);
+  color: var(--red);
+}
+
+.reject-btn:hover {
+  background: var(--red);
+  color: var(--off-white);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  body {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: relative;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .sidebar-tag {
+    display: none;
+  }
+
+  .sidebar ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .sidebar li span {
+    display: none;
+  }
+
+  .main-content {
+    padding: 1.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
