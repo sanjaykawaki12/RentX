@@ -1,3 +1,5 @@
+const API_BASE_URL =
+    "https://rentx-production-513d.up.railway.app";
 const ROLE_COPY = {
   USER: {
     eyebrow: 'join the fleet',
@@ -77,7 +79,7 @@ function register(){
 
     const role = document.getElementById("role").value;
 
-    fetch("http://localhost:8080/auth/register",{
+    fetch(`${API_BASE_URL}/auth/register`,{
 
         method:"POST",
 
