@@ -1,50 +1,60 @@
+const API_BASE_URL =
+    "https://rentx-production-513d.up.railway.app";
+
 const userId =
-localStorage.getItem("userId");
+    localStorage.getItem("userId");
+
 
 /* CHECK LOGIN */
 
-if(!userId){
+if (!userId) {
 
     alert("Please Login First");
 
     window.location.href =
-    "login.html";
+        "login.html";
 }
+
 
 let allVehicles = [];
 
+
 /* LOAD VEHICLES */
 
-function loadVehicles(){
+function loadVehicles() {
 
-    fetch("http://localhost:8080/vehicle/all")
+    fetch(`${API_BASE_URL}/vehicle/all`)
 
-    .then(res => res.json())
+        .then(res => res.json())
 
-    .then(data => {
+        .then(data => {
 
-        allVehicles = data;
+            allVehicles = data;
 
-        displayVehicles(data);
+            displayVehicles(data);
 
-    })
+        })
 
-    .catch(error => {
+        .catch(error => {
 
-        console.log(error);
+            console.log(error);
 
-    });
+            alert("Unable to load vehicles");
+
+        });
 
 }
 
+
 /* DISPLAY VEHICLES */
 
-function displayVehicles(vehicles){
+function displayVehicles(vehicles) {
 
     const container =
-    document.getElementById("vehicleContainer");
+        document.getElementById("vehicleContainer");
 
     container.innerHTML = "";
+
 
     vehicles.forEach(vehicle => {
 
@@ -53,9 +63,9 @@ function displayVehicles(vehicles){
         <div class="card">
 
             <img src="${
-            vehicle.imageBase64
-            ? `data:image/jpeg;base64,${vehicle.imageBase64}`
-            : 'https://via.placeholder.com/300'
+                vehicle.imageBase64
+                ? `data:image/jpeg;base64,${vehicle.imageBase64}`
+                : "https://via.placeholder.com/300"
             }">
 
             <div class="info">
@@ -67,9 +77,9 @@ function displayVehicles(vehicles){
                 <h3>Rs. ${vehicle.price}</h3>
 
                 <button
-                onclick="openModal(${vehicle.id})">
+                    onclick="openModal(${vehicle.id})">
 
-                View Details
+                    View Details
 
                 </button>
 
@@ -83,309 +93,414 @@ function displayVehicles(vehicles){
 
 }
 
+
 /* SEARCH VEHICLES */
 
-function searchVehicles(){
+function searchVehicles() {
 
     const searchText =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
 
-    document.getElementById("searchInput")
-
-    .value
-
-    .toLowerCase();
 
     const filteredVehicles =
+        allVehicles.filter(vehicle =>
 
-    allVehicles.filter(vehicle =>
+            vehicle.name
+                .toLowerCase()
+                .includes(searchText)
 
-        vehicle.name
-        .toLowerCase()
-        .includes(searchText)
+            ||
 
-        ||
+            vehicle.type
+                .toLowerCase()
+                .includes(searchText)
 
-        vehicle.type
-        .toLowerCase()
-        .includes(searchText)
+        );
 
-    );
 
     displayVehicles(filteredVehicles);
 
 }
 
+
 /* FILTER VEHICLES */
 
-function filterVehicles(category){
+function filterVehicles(category) {
 
-    if(category === "all"){
+    if (category === "all") {
 
         displayVehicles(allVehicles);
 
         return;
+
     }
 
+
     const filteredVehicles =
+        allVehicles.filter(vehicle =>
 
-    allVehicles.filter(vehicle =>
+            vehicle.type
+                .toLowerCase() === category
 
-        vehicle.type
-        .toLowerCase() === category
+        );
 
-    );
 
     displayVehicles(filteredVehicles);
 
 }
 
+
 /* GO PAYMENT */
 
-function goPayment(vehicleId){
+function goPayment(vehicleId) {
 
     localStorage.setItem(
         "vehicleId",
         vehicleId
     );
 
+
     window.location.href =
-    "payment.html";
+        "payment.html";
 
 }
 
+
 /* LOGOUT */
 
-function logout(){
+function logout() {
 
     localStorage.clear();
 
     window.location.href =
-    "login.html";
+        "login.html";
+
 }
+
 
 /* INITIAL LOAD */
 
 loadVehicles();
 
-function scrollToVehicles(){
+
+/* SCROLL TO VEHICLES */
+
+function scrollToVehicles() {
 
     document
-    .getElementById("vehiclesSection")
+        .getElementById("vehiclesSection")
+        .scrollIntoView({
 
-    .scrollIntoView({
+            behavior: "smooth"
 
-        behavior:"smooth"
-
-    });
+        });
 
 }
-function toggleTheme(){
+
+
+/* DARK / LIGHT THEME */
+
+function toggleTheme() {
 
     document.body
-    .classList
-    .toggle("dark");
+        .classList
+        .toggle("dark");
 
 }
-function openModal(id){
+
+
+/* OPEN VEHICLE MODAL */
+
+function openModal(id) {
 
     const vehicle =
+        allVehicles.find(v =>
+            v.id === id
+        );
 
-    allVehicles.find(v =>
 
-        v.id === id
-    );
+    if (!vehicle) {
 
-    document
-    .getElementById(
-    "vehicleModal"
-    )
+        return;
 
-    .style.display = "flex";
+    }
 
-    document
-    .getElementById(
-    "modalImage"
-    )
-
-    .src =
-    `data:image/jpeg;base64,
-    ${vehicle.imageBase64}`;
 
     document
-    .getElementById(
-    "modalName"
-    )
+        .getElementById("vehicleModal")
+        .style.display = "flex";
 
-    .innerText =
-    vehicle.name;
 
     document
-    .getElementById(
-    "modalType"
-    )
+        .getElementById("modalImage")
+        .src =
+        vehicle.imageBase64
+        ? `data:image/jpeg;base64,${vehicle.imageBase64}`
+        : "https://via.placeholder.com/300";
 
-    .innerText =
-    vehicle.type;
-
-    document
-    .getElementById(
-    "modalPrice"
-    )
-
-    .innerText =
-    "Rs. " + vehicle.price;
 
     document
-    .getElementById(
-    "bookBtn"
-    )
+        .getElementById("modalName")
+        .innerText =
+        vehicle.name;
 
-    .onclick = () => {
 
-        goPayment(vehicle.id);
+    document
+        .getElementById("modalType")
+        .innerText =
+        vehicle.type;
 
-    };
+
+    document
+        .getElementById("modalPrice")
+        .innerText =
+        "Rs. " + vehicle.price;
+
+
+    document
+        .getElementById("bookBtn")
+        .onclick = () => {
+
+            goPayment(vehicle.id);
+
+        };
+
+
+    loadReviews(vehicle.id);
+
 }
 
-function closeModal(){
+
+/* CLOSE MODAL */
+
+function closeModal() {
 
     document
-    .getElementById(
-    "vehicleModal"
-    )
+        .getElementById("vehicleModal")
+        .style.display =
+        "none";
 
-    .style.display =
-    "none";
 }
+
+
+/* REVIEW */
+
 let currentVehicleId = null;
 
-function submitReview(){
+
+function submitReview() {
 
     const reviewText =
+        document
+        .getElementById("reviewText")
+        .value;
 
-    document.getElementById(
-    "reviewText"
-    ).value;
+
+    if (!reviewText.trim()) {
+
+        alert("Please enter a review");
+
+        return;
+
+    }
+
 
     fetch(
-    "http://localhost:8080/review/add",
+        `${API_BASE_URL}/review/add`,
 
-    {
+        {
 
-        method:"POST",
+            method: "POST",
 
-        headers:{
-            "Content-Type":"application/json"
-        },
+            headers: {
 
-        body:JSON.stringify({
+                "Content-Type":
+                    "application/json"
 
-            vehicleId:
-            currentVehicleId,
+            },
 
-            username:"User",
+            body: JSON.stringify({
 
-            rating:5,
+                vehicleId:
+                    currentVehicleId,
 
-            comment:reviewText
+                username:
+                    localStorage.getItem("userName") || "User",
+
+                rating: 5,
+
+                comment:
+                    reviewText
+
+            })
 
         })
 
-    })
+        .then(res => {
 
-    .then(() => {
+            if (!res.ok) {
 
-        alert(
-        "Review Added ⭐"
-        );
+                throw new Error(
+                    "Review failed"
+                );
 
-        loadReviews(
-        currentVehicleId
-        );
+            }
 
-    });
+            return res.json();
+
+        })
+
+        .then(data => {
+
+            alert(
+                "Review Added ⭐"
+            );
+
+
+            document
+                .getElementById("reviewText")
+                .value = "";
+
+
+            loadReviews(
+                currentVehicleId
+            );
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+            alert(
+                "Unable to add review"
+            );
+
+        });
 
 }
-function loadReviews(vehicleId){
+
+
+/* LOAD REVIEWS */
+
+function loadReviews(vehicleId) {
 
     currentVehicleId =
-    vehicleId;
+        vehicleId;
+
 
     fetch(
-    `http://localhost:8080/review/${vehicleId}`
+        `${API_BASE_URL}/review/${vehicleId}`
     )
 
-    .then(res => res.json())
+        .then(res => res.json())
 
-    .then(data => {
+        .then(data => {
 
-        const container =
+            const container =
+                document
+                .getElementById(
+                    "reviewContainer"
+                );
 
-        document.getElementById(
-        "reviewContainer"
-        );
 
-        container.innerHTML = "";
+            if (!container) {
 
-        data.forEach(review => {
+                return;
 
-            container.innerHTML += `
+            }
 
-            <div class="review-item">
 
-                ⭐⭐⭐⭐⭐
+            container.innerHTML = "";
 
-                <br>
 
-                ${review.comment}
+            data.forEach(review => {
 
-            </div>
+                container.innerHTML += `
 
-            `;
+                <div class="review-item">
+
+                    ⭐⭐⭐⭐⭐
+
+                    <br>
+
+                    ${review.comment}
+
+                </div>
+
+                `;
+
+            });
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
 
         });
-
-    });
 
 }
-function loadNotifications(){
+
+
+/* LOAD NOTIFICATIONS */
+
+function loadNotifications() {
 
     const box =
+        document
+        .getElementById(
+            "notificationBox"
+        );
 
-    document.getElementById(
-    "notificationBox"
-    );
+
+    if (!box) {
+
+        return;
+
+    }
+
 
     fetch(
-    `http://localhost:8080/notification/${
-    localStorage.getItem(
-    "userId"
-    )}`
+        `${API_BASE_URL}/notification/${
+            localStorage.getItem("userId")
+        }`
     )
 
-    .then(res => res.json())
+        .then(res => res.json())
 
-    .then(data => {
+        .then(data => {
 
-        box.innerHTML = "";
+            box.innerHTML = "";
 
-        data.forEach(n => {
 
-            box.innerHTML += `
+            data.forEach(n => {
 
-            <div
-            class="notification-item">
+                box.innerHTML += `
 
-            ${n.message}
+                <div class="notification-item">
 
-            </div>
+                    ${n.message}
 
-            `;
+                </div>
+
+                `;
+
+            });
+
+
+            box.style.display =
+                "block";
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
 
         });
-
-        box.style.display = "block";
-
-    });
 
 }
