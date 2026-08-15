@@ -1,4 +1,6 @@
-fetch("http://localhost:8080/booking/all")
+const API_BASE_URL =
+    "https://rentx-production-513d.up.railway.app";
+fetch(`${API_BASE_URL}/booking/all`)
 
 .then(res => res.json())
 
