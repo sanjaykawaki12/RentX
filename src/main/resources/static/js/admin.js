@@ -1,6 +1,6 @@
-fetch(
-"http://localhost:8080/user/all"
-)
+const API_BASE_URL =
+    "https://rentx-production-513d.up.railway.app";
+fetch(`${API_BASE_URL}/user/all`)
 
 .then(res => res.json())
 
@@ -43,9 +43,7 @@ fetch(
 
 });
 
-fetch(
-"http://localhost:8080/vehicle/all"
-)
+fetch(`${API_BASE_URL}/vehicle/all`)
 
 .then(res => res.json())
 
@@ -61,9 +59,7 @@ fetch(
 
 });
 
-fetch(
-"http://localhost:8080/booking/all"
-)
+fetch(`${API_BASE_URL}/booking/all`)
 
 .then(res => res.json())
 
