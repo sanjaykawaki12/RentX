@@ -15,7 +15,7 @@ const ROLE_COPY = {
   }
 };
 
-const API_BASE = 'http://localhost:8080';
+const API_BASE = 'https://rentx-production-513d.up.railway.app';
 
 const brandPanel = document.querySelector('.brand-panel');
 const brandEyebrow = document.getElementById('brandEyebrow');
